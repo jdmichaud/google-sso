@@ -13,7 +13,7 @@ RUN cd /root && \
 
 COPY . /root/google-sso/
 
-RUN cd /root/google-sso/ && \
+RUN cd /root/google-sso/frontend && \
   npm install && \
   npm run build && \
   cp -r dist/* /usr/share/nginx/html && \
