@@ -1,11 +1,23 @@
 
-function useGoogleIdTokenForAuth(token) {
+const CLIENT_ID = '626391493478-3mg44q3l5ivijc5p72avsg41v8bpkjid.apps.googleusercontent.com'
+
+function useGoogleIdTokenForAuth(credential) {
   // Call the backend with the token through an HTTP POST request
+  const request = new XMLHttpRequest();
+  // request.onreadystatechange = function() {
+  //   if (request.readyState == 4 && request.status == 200)
+  //     callback(request.responseText);
+  // }
+  request.open('POST', `http://${window.location.hostname}:8000/auth`, true); // true for asynchronous
+  request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  request.send(JSON.stringify(credential));
 }
 
+// Start the authentication process once the google library is loaded
 window.onGoogleYoloLoad = (googleyolo) => {
   console.log(`The 'googleyolo' object is ready for use.`);
 
+  // Configuration object to be used with the google library
   const signinConfiguration = {
     supportedAuthMethods: [ // List of providers
       'https://accounts.google.com', // To retrieve google account credentials
@@ -14,14 +26,17 @@ window.onGoogleYoloLoad = (googleyolo) => {
     supportedIdTokenProviders: [{ // ID tokens will be used to securely identify the user with the app's backend
       uri: 'https://accounts.google.com',
       // This the app ID created on the Google Console
-      clientId: '626391493478-3mg44q3l5ivijc5p72avsg41v8bpkjid.apps.googleusercontent.com',
+      clientId: CLIENT_ID,
     }]
   };
 
+  // Retrieve the authentication of the currently logged in user in the browser
   googleyolo.retrieve(signinConfiguration).then(credential => {
     console.log('retrieve was successfull', credential);
-    useGoogleIdTokenForAuth(credential.idToken);
+    useGoogleIdTokenForAuth(credential);
   }).catch(error => {
+    // No users are logged in, request the user to log to a registered account
+    // on this browser
     console.warn(error.message)
     if (error.type === 'noCredentialsAvailable') {
       googleyolo.hint(signinConfiguration).then(credential => {
