@@ -1,21 +1,31 @@
+'use strict';
 
+// This is the API key to be used for interaction with Google aith services.
+// You can retrieve it in Google Console. It is unique for every "application".
 const CLIENT_ID = '626391493478-3mg44q3l5ivijc5p72avsg41v8bpkjid.apps.googleusercontent.com'
 
+// Send token to the backend for login
 function useGoogleIdTokenForAuth(credential) {
   // Call the backend with the token through an HTTP POST request
   const request = new XMLHttpRequest();
-  // request.onreadystatechange = function() {
-  //   if (request.readyState == 4 && request.status == 200)
-  //     callback(request.responseText);
-  // }
+  request.onreadystatechange = function() {
+    if (request.readyState == 4 && request.status == 200)
+      console.log('token is verified');
+  }
   request.open('POST', `http://${window.location.hostname}:8000/auth`, true); // true for asynchronous
   request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
   request.send(JSON.stringify(credential));
 }
 
+/**
+ * This function activate Google Yolo mecanism. A popup will appear and you can
+ * either select your account if multiple accounts are available of it will
+ * automaticaly log you with the only account saved by the browser.
+ * If no credentials are stored in the browser, the `hint` function will fail
+ * and return 'noCredentialsAvailable'.
+ */
 window.startGoogleYolo = function (googleyolo) {
   console.log(`The 'googleyolo' object is ready for use.`);
-
   // Configuration object to be used with the google library
   const signinConfiguration = {
     supportedAuthMethods: [ // List of providers
@@ -28,7 +38,6 @@ window.startGoogleYolo = function (googleyolo) {
       clientId: CLIENT_ID,
     }]
   };
-
   // Retrieve the authentication of the currently logged in user in the browser
   googleyolo.retrieve(signinConfiguration).then(credential => {
     console.log('retrieve was successfull', credential);
@@ -47,6 +56,7 @@ window.startGoogleYolo = function (googleyolo) {
             // request manual sign up or do nothing.
             break;
           case "noCredentialsAvailable":
+            console.log('No credentials are available');
             // No hint available for the session. Depending on the desired UX,
             // request manual sign up or do nothing.
             break;
@@ -79,6 +89,7 @@ window.onGoogleYoloLoad = (googleyolo) => {
   window.googleyolo = googleyolo;
 }
 
+// Called by the custom login form
 window.login = function () {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
