@@ -50,3 +50,9 @@ app.listen(options.port, options.host, () => {
   prompt += ` http://${options.host}:${options.port}/${options.prefix}`;
   console.log(prompt);
 });
+
+// Check the client secret is set
+if (process.env.CLIENT_SECRET === undefined) {
+  console.error('Please your CLIENT_SECRET in your environment');
+  process.exit(1);
+}
