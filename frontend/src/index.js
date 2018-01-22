@@ -79,3 +79,8 @@ window.onGoogleYoloLoad = (googleyolo) => {
   window.googleyolo = googleyolo;
 }
 
+window.login = function () {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  console.log(`logging in with ${email} ${password}`);
+}
