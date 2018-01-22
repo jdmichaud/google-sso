@@ -13,8 +13,7 @@ function useGoogleIdTokenForAuth(credential) {
   request.send(JSON.stringify(credential));
 }
 
-// Start the authentication process once the google library is loaded
-window.onGoogleYoloLoad = (googleyolo) => {
+window.startGoogleYolo = function (googleyolo) {
   console.log(`The 'googleyolo' object is ready for use.`);
 
   // Configuration object to be used with the google library
@@ -74,3 +73,9 @@ window.onGoogleYoloLoad = (googleyolo) => {
     }
   });
 };
+
+// Start the authentication process once the google library is loaded
+window.onGoogleYoloLoad = (googleyolo) => {
+  window.googleyolo = googleyolo;
+}
+

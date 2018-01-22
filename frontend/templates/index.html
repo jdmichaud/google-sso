@@ -3,9 +3,71 @@
   <head>
     <title>Welcome to my App</title>
     <script src="https://smartlock.google.com/client"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      #login {
+        width: 100%;
+      }
+      #login-title {
+        border-bottom: solid 1px #AAA;
+      }
+      .google-login-button {
+        border-radius: 2px;
+        border: solid 1px #AAA;
+        background-color: #EEE;
+        width: 100%;
+        height: 40px;
+      }
+      .button-text {
+        font-size: 16px;
+        color: #666;
+      }
+      button.google-login-button::before {
+        font-family: fontAwesome;
+        content: "\f1a0";
+      }
+      #or-row {
+        line-height: 60px;
+      }
+      .form-group {
+        width: 100%;
+      }
+    </style>
   </head>
 
   <body>
-    <div id="user"></div>
+    <div class="container h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col"></div><div class="col">
+          <div class="row">
+            <div id="login"><p id="login-title">Login</p></div>
+          </div>
+          <div class="row">
+            <button class="google-login-button" onclick="startGoogleYolo(window.googleyolo)">
+              <span class="google-login-button-icon"></span>
+              <span class="button-text">Log in with Google</span>
+            </button>
+          </div>
+          <div class="row justify-content-center" id="or-row">or</div>
+          <div class="row" id="custom-login-form form">
+            <div class="form-group">
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary">Log in</button>
+              <span class="float-right"><a href="#">Forgot your password?</a></span>
+            </div>
+          </div>
+        </div><div class="col"></div>
+      </div>
+
+    </div>
   </body>
 </html>
