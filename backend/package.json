@@ -4,7 +4,8 @@
   "description": "A backend for the Google OAuth test project",
   "main": "main.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
