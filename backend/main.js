@@ -32,7 +32,7 @@ app.post(`/auth/?`, (req, res) => {
   }
   auth.authenticate(req.body.idToken).then(() => {
     console.log('token verified');
-    res.status(200);
+    res.sendStatus(200);
   }).catch(() => {
     console.log('token failed to verify');
     res.status(403).send({ error: `failed to verify ${req.body.displayName} identify` });
