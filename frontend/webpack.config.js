@@ -23,6 +23,12 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: 'style-loader!css-loader',
+    }, {
+      test: /\.(ttf|eot|woff|woff2|svg)$/,
+      loader: "file-loader",
+      options: {
+        name: "fonts/[name].[ext]",
+      },
     }]
   },
   plugins: [

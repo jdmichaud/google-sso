@@ -1,9 +1,9 @@
 require('@webcomponents/custom-elements/custom-elements.min');
 require('bootstrap/dist/css/bootstrap.min.css');
-// TODO: require('font-awesome/css/font-awesome.css');
+require('font-awesome/css/font-awesome.css');
 
 import { startGoogleYolo } from 'google-auth';
-import { LoginForm } from 'components/login-form/login-form';
+// import { LoginForm } from 'components/login-form/login-form';
 
 // Start the authentication process once the google library is loaded
 window.onGoogleYoloLoad = (googleyolo) => {
@@ -28,7 +28,7 @@ window.googleLogin = function () {
   startGoogleYolo(window.googleyolo).then((credential) => {
     useGoogleIdTokenForAuth(credential);
   }).catch((error) => {
-    console.log(`error: ${error}`);
+    console.log(`error: ${error.type}`);
     switch (error.type) {
       case "userCanceled":
         // The user closed the hint selector. Depending on the desired UX,
