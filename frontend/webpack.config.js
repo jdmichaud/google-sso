@@ -17,14 +17,20 @@ module.exports = {
       query: {
           presets: ['@babel/preset-env']
       }
+    }, {
+      test: /\.html$/,
+      loader: 'html-loader',
+    }, {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader',
     }]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'templates/index.html',
+      template: 'index.html',
       chunksSortMode: 'dependency',
     }),
-    new CopyWebpackPlugin([{ from: 'templates' }]),
+    new CopyWebpackPlugin([{ from: 'index.html' }]),
   ],
   resolve: {
     modules: [

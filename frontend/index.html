@@ -3,7 +3,6 @@
   <head>
     <title>Welcome to my App</title>
     <script src="https://smartlock.google.com/client"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
     <style>
       html, body {
@@ -47,7 +46,7 @@
             <div id="login"><p id="login-title">Login</p></div>
           </div>
           <div class="row">
-            <button class="google-login-button" onclick="startGoogleYolo(window.googleyolo)">
+            <button class="google-login-button" onclick="googleLogin(window.googleyolo)">
               <span class="google-login-button-icon"></span>
               <span class="button-text">Log in with Google</span>
             </button>
@@ -61,7 +60,7 @@
               <input type="password" class="form-control" id="password" placeholder="Password">
             </div>
             <div class="form-group">
-              <button class="btn btn-primary" onclick="window.login()">Log in</button>
+              <button class="btn btn-primary" onclick="customLogin()">Log in</button>
               <span class="float-right"><a href="#">Forgot your password?</a></span>
             </div>
           </div>
